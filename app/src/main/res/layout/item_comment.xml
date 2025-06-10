@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/comment_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Comment"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/like_comment_button"
+        android:layout_width="18dp"
+        android:layout_height="22dp"
+        android:adjustViewBounds="true"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:contentDescription="@string/like"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_heart_outline" />
+
+    <TextView
+        android:id="@+id/like_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:paddingLeft="4dp"
+        android:paddingRight="8dp" />
+
+    <ImageButton
+        android:id="@+id/delete_comment_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_delete"
+        android:contentDescription="Delete Comment"
+        android:visibility="gone" />
+
+</LinearLayout>

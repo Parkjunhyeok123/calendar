@@ -1,0 +1,9 @@
+<!-- res/drawable/switch_track_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <size
+        android:width="36dp"
+        android:height="13dp" /> <!-- height 값을 조절하여 위아래로 좁게 만듭니다 -->
+    <solid android:color="#CCCCCC" />
+    <corners android:radius="10dp" /> <!-- track의 모서리를 둥글게 만듭니다 -->
+</shape>

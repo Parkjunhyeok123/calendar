@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#9DC1E1</color>
+    <color name="purple_500">#6E8DC3</color>
+    <color name="purple_700">#5F95CE</color>
+    <color name="teal_200">#FFE0F7F3</color>
+    <color name="teal_700">#FF52C9B1</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background_color">#FFFFFF</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="primaryColor">#6200EE</color>
+    <!-- res/color/tab_text_color.xml -->
+
+    <color name="lightGray">#D3D3D3</color> <!-- 밝은 회색 -->
+
+    <!-- 텍스트 색상 -->
+    <color name="blue">#2196F3</color> <!-- 예시: 파란색 -->
+    <color name="gray">#9E9E9E</color> <!-- 예시: 회색 -->
+    <color name="blue_light">#BBDEFB</color> <!-- 예시: 밝은 파란색 -->
+    <color name="gray_light">#E0E0E0</color>
+    <color name="primary_text_color">#000000</color>
+
+    <!-- 프라이머리 색상 -->
+    <color name="primary_color">#8A9CE9</color>
+    <!-- 기존 색상 정의 아래에 추가 -->
+    <color name="intro_background">#9DC1E1</color> <!-- 밝은 보라색 -->
+    <color name="pur_200">#FFBB86FC</color>
+    <color name="pur_500">#FF6200EE</color>
+    <color name="pur_700">#FF3700B3</color>
+    <color name="teal_20">#FF03DAC5</color>
+    <color name="teal_70">#FF018786</color>
+
+    <color name="green">#6EF253</color>
+    <color name="red">#E91313</color>
+</resources>

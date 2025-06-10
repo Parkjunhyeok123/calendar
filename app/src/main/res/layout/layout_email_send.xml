@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- 받는 사람 이메일 -->
+    <EditText
+        android:id="@+id/editTextTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="받는 사람 이메일"
+        android:inputType="textEmailAddress"/>
+
+    <!-- 제목 -->
+    <EditText
+        android:id="@+id/editTextSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="제목"
+        android:inputType="text"/>
+
+    <!-- 본문 -->
+    <EditText
+        android:id="@+id/editTextBody"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:hint="본문"
+        android:inputType="textMultiLine"
+        android:minLines="5"/>
+
+    <!-- 첨부파일 선택 버튼 -->
+    <Button
+        android:id="@+id/btnSelectFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="첨부파일 선택"/>
+
+    <!-- 첨부파일 이름 표시 -->
+    <TextView
+        android:id="@+id/textViewFileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="첨부파일 없음"
+        android:textColor="#555555"
+        android:paddingTop="8dp"/>
+
+    <!-- 보내기 버튼 -->
+    <Button
+        android:id="@+id/btnSendEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="이메일 보내기"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

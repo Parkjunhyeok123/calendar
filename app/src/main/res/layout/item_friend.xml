@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/tvFriendName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Friend Name"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvFriendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="friend@example.com"
+        android:textSize="14sp"
+        android:textColor="#666" />
+
+    <TextView
+        android:id="@+id/tvFriendNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="010-0000-0000"
+        android:textSize="14sp"
+        android:textColor="#666" />
+
+</LinearLayout>

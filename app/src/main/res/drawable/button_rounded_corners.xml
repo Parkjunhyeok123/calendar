@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#d9d9d9" /> <!-- 버튼의 배경색을 지정합니다. -->
+    <corners android:radius="12dp" /> <!-- 테두리의 각을 조절하여 둥근 테두리를 만듭니다. -->
+</shape>

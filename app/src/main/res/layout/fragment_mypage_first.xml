@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#FAFAFA">
+
+    <!-- 사용자 이름 입력 필드 -->
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="이름"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPersonName"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#212121"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- 전화번호 입력 필드 -->
+    <EditText
+        android:id="@+id/editTextNumber"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="전화번호"
+        android:layout_marginBottom="16dp"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#212121"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- 아이디 입력 필드 -->
+    <EditText
+        android:id="@+id/edit_text_id"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="아이디"
+        android:layout_marginBottom="20dp"
+        android:inputType="textEmailAddress"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#212121"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- 소속 팀 입력 필드 -->
+    <EditText
+        android:id="@+id/editTextTeam"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="소속 팀"
+        android:layout_marginBottom="20dp"
+        android:inputType="text"
+        android:padding="12dp"
+        android:background="@drawable/edittext_background"
+        android:textColor="#212121"
+        android:textSize="16sp"
+        android:fontFamily="sans-serif-medium" />
+
+
+
+
+    <!-- 상태 선택 스피너 -->
+    <Spinner
+        android:id="@+id/spinnerStatus"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/spinner_background"
+        android:padding="12dp"
+        android:spinnerMode="dropdown" />
+
+    <!-- 정보 수정 버튼 -->
+    <Button
+        android:id="@+id/buttonUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="정보 수정"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rounded_button" />
+
+</LinearLayout>

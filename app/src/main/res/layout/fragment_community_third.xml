@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 게시글 목록을 표시하는 ListView -->
+    <ListView
+        android:id="@+id/listViewPostsNotice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttonNewPostNotice" />
+
+    <!-- 새로운 게시글 작성 버튼 -->
+    <Button
+        android:id="@+id/buttonNewPostNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60dp"
+
+
+        android:text="게시글 작성" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container_notice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

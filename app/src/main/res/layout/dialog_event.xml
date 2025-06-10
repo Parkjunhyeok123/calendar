@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Title input -->
+    <EditText
+        android:id="@+id/eventTitleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Event Title"
+        android:inputType="text"/>
+
+    <!-- Date input -->
+    <TextView
+        android:id="@+id/eventDateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:gravity="center_vertical|start"
+        android:text="Select Date"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/eventTimeInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="시간 선택 (예: 14:30)"
+        android:padding="12dp"
+        android:textColor="@android:color/black"
+        android:focusable="false"
+        android:clickable="true"/>
+
+
+    <!-- Shared checkbox -->
+    <CheckBox
+        android:id="@+id/sharedCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shared Event" />
+
+</LinearLayout>

@@ -1,0 +1,97 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- 제목 입력 -->
+    <EditText
+        android:id="@+id/editTextTitleNotice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="제목을 입력하세요"
+        android:padding="16dp"
+        android:background="@drawable/bg_edittext_rounded"
+        android:textColor="#333333"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 내용 입력 -->
+    <EditText
+        android:id="@+id/editTextContentNotice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="내용을 입력하세요"
+        android:minLines="5"
+        android:gravity="top|start"
+        android:padding="16dp"
+        android:background="@drawable/bg_edittext_rounded"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextTitleNotice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/testButtonNotice" />
+
+    <!-- 테스트 버튼 -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/testButtonNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="테스트용 버튼"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:textAllCaps="false"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/editTextContentNotice"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- 버튼 그룹 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/testButtonNotice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_container_notice">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCancelNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성 취소"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginEnd="12dp"
+            android:onClick="onCancelButtonClick" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSubmitNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="작성 완료"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button"
+            android:backgroundTint="#6200EE"
+            android:textColor="#FFFFFF"
+            android:onClick="onSubmitButtonClick" />
+    </LinearLayout>
+
+    <!-- 프래그먼트 영역 -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container_notice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/buttonSubmitNotice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:name="com.company.calendar.ui.community.NoticeWritePostFragment" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

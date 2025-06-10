@@ -1,0 +1,120 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 게시글 제목 -->
+    <TextView
+        android:id="@+id/textViewTitleNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+    <!-- 게시글 작성 시간 (제목 오른쪽 끝) -->
+    <TextView
+        android:id="@+id/text_view_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/textViewTitleNotice"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray" />
+
+    <!-- 게시글 내용 -->
+    <TextView
+        android:id="@+id/textViewContentNotice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTitleNotice"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
+        android:padding="16dp" />
+
+    <!-- 조회수 -->
+    <TextView
+        android:id="@+id/text_view_view_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewContentNotice"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="조회수" />
+
+    <!-- 게시글 작성자 -->
+    <TextView
+        android:id="@+id/text_view_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_view_view_count"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="작성자" />
+
+    <!-- 수정하기 버튼 -->
+    <Button
+        android:id="@+id/buttonEditNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수정하기"
+        android:layout_below="@id/text_view_author"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp" />
+
+    <!-- 삭제하기 버튼 -->
+    <Button
+        android:id="@+id/buttonDeleteNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="삭제하기"
+        android:layout_below="@id/text_view_author"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@id/buttonEditNotice"
+        android:layout_marginStart="16dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp" />
+
+    <!-- 댓글 입력 창 -->
+    <EditText
+        android:id="@+id/editTextCommentNotice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonEditNotice"
+        android:layout_marginTop="16dp"
+        android:hint="댓글을 입력하세요..."
+        android:padding="16dp" />
+
+    <!-- 댓글 작성 버튼 -->
+    <Button
+        android:id="@+id/buttonSubmitCommentNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="댓글 작성"
+        android:layout_below="@id/editTextCommentNotice"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:textColor="#FFFFFF"
+        android:background="@drawable/rounded_button"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="10dp" />
+
+    <!-- 댓글 리스트를 표시할 RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCommentsNotice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSubmitCommentNotice"
+        android:layout_marginTop="16dp"
+        android:padding="16dp" />
+
+</RelativeLayout>

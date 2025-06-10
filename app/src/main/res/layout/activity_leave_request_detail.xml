@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F9FAFB">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_card"
+        android:padding="16dp"
+        android:elevation="4dp">
+
+        <!-- 사용자 이름 -->
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="홍길동"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#111827" />
+
+        <!-- 날짜 -->
+        <TextView
+            android:id="@+id/tvDateRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-06-01 ~ 2025-06-03"
+            android:textSize="16sp"
+            android:textColor="#374151"
+            android:layout_marginTop="8dp" />
+
+        <!-- 휴가 유형 -->
+        <TextView
+            android:id="@+id/tvLeaveType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="연차"
+            android:textSize="16sp"
+            android:textColor="#374151"
+            android:layout_marginTop="4dp" />
+
+        <!-- 사유 -->
+        <TextView
+            android:id="@+id/tvReason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사유: 가족 행사 참석"
+            android:textSize="16sp"
+            android:textColor="#374151"
+            android:layout_marginTop="12dp" />
+
+        <!-- 상태 -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="승인대기"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1D4ED8"
+            android:layout_marginTop="12dp" />
+
+        <!-- 관리자용 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnApprove"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="승인"
+                android:backgroundTint="#10B981"
+                android:textColor="#FFFFFF"
+                android:layout_marginEnd="8dp" />
+
+            <Button
+                android:id="@+id/btnReject"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="반려"
+                android:backgroundTint="#EF4444"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

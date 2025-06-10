@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9FAFB"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- 요일 선택 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewWeekDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:layout_marginBottom="12dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:background="@drawable/bg_card"/>
+
+        <!-- 개인 일정 섹션 -->
+        <TextView
+            android:id="@+id/personalTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👤 개인 일정"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="4dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewPersonal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:layout_marginBottom="16dp"
+            android:nestedScrollingEnabled="false"
+            android:padding="8dp"/>
+
+        <!-- 공유 일정 섹션 -->
+        <TextView
+            android:id="@+id/sharedTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🤝 공유 일정"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="4dp"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewShared"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:layout_marginBottom="16dp"
+            android:nestedScrollingEnabled="false"
+            android:padding="8dp"/>
+    </LinearLayout>
+</ScrollView>

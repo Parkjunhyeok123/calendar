@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#F5F5F5">
+
+    <!-- 제목 -->
+    <TextView
+        android:id="@+id/tvFriendTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="👥 내 친구 목록"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 검색 필드 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:drawable/edit_text"
+        android:padding="4dp"
+        android:elevation="2dp"
+        android:layout_marginBottom="12dp"
+        android:backgroundTint="#FFFFFF">
+
+        <EditText
+            android:id="@+id/editTeamSearch"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="🔍 이름 또는 팀으로 검색"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:background="@android:color/transparent"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btnSearchTeam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="검색"
+            android:backgroundTint="#1976D2"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp"
+            android:layout_marginStart="8dp"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="8dp"
+            android:elevation="2dp" />
+    </LinearLayout>
+
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD"
+        android:layout_marginBottom="8dp" />
+
+    <!-- 친구 없음 표시 -->
+    <TextView
+        android:id="@+id/txtNoFriends"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="😢 친구가 없습니다."
+        android:textColor="#999999"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp" />
+
+    <!-- 친구 목록 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUsers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp" />
+</LinearLayout>

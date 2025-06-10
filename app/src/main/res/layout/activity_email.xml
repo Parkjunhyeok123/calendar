@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/coordinatorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.email.EmailActivity"
+    android:background="#F9FAFB">
+
+    <!-- 이메일 리스트와 버튼을 담는 컨테이너 -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <!-- 타이틀 -->
+        <TextView
+            android:id="@+id/tv_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📥 받은 이메일"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#111827"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 이메일 목록 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/email_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:elevation="2dp"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            android:scrollbars="vertical"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 전송 버튼 -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_send_email"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="이메일 보내기"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:icon="@drawable/ic_send"
+            android:iconTint="#FFFFFF"
+            android:backgroundTint="#2563EB"
+            android:textColor="#FFFFFF"
+             />
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

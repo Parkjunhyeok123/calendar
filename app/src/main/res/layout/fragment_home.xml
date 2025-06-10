@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Spinner for calendar type selection -->
+    <Spinner
+        android:id="@+id/eventSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!-- CalendarView for displaying the calendar -->
+    <android.widget.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:showWeekNumber="false"/>
+
+    <!-- RecyclerView for listing events below the calendar -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:scrollbars="vertical" />
+
+    <!-- Floating Action Button for adding a new event -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addEventBtn"
+        android:layout_width="58dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
+        android:layout_marginHorizontal="70dp"
+        android:contextClickable="false"
+        android:src="@android:drawable/ic_input_add"
+        app:hoveredFocusedTranslationZ="2dp" />
+
+
+</LinearLayout>

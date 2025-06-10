@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#FAFAFA">
+
+    <Button
+        android:id="@+id/btnSelectDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="📅 날짜 선택"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#1976D2"
+        android:textColor="#FFFFFF"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="4dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textBreakfast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🍞 조식: -"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:paddingVertical="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textLunch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🍱 중식: -"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:paddingVertical="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/textDinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🍛 석식: -"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:paddingVertical="12dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_marginBottom="8dp" />
+
+</LinearLayout>
