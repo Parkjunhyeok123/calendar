@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.company.calendar.R;
 import com.company.calendar.ui.approval.LeaveRequestListActivity;
 import com.company.calendar.ui.attendance.AttendanceActivity;
+import com.company.calendar.ui.card.CardEditorActivity;
 import com.company.calendar.ui.chat.ChatActivity;
 import com.company.calendar.ui.email.EmailActivity;
 import com.company.calendar.ui.event.EventListActivity;
@@ -103,6 +104,7 @@ public class MainFragment extends Fragment {
         shortcutList.add(new Shortcut("식당", R.drawable.ic_food));
         shortcutList.add(new Shortcut("전자결재", R.drawable.ic_ok));
         shortcutList.add(new Shortcut("부서별 채팅", R.drawable.ic_chat));
+        shortcutList.add(new Shortcut("명함", R.drawable.ic_chat));
 
 
         shortcutAdapter = new ShortcutAdapter(getContext(), shortcutList, position -> {
@@ -130,6 +132,9 @@ public class MainFragment extends Fragment {
                     break;
                 case 7:
                     startActivity(new Intent(getContext(), ChatActivity.class)); // 부서별 채팅 연결
+                    break;
+                case 8:
+                    startActivity(new Intent(getContext(), CardEditorActivity.class));
                     break;
             }
         });

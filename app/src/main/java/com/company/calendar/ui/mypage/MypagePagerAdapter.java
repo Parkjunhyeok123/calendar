@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.company.calendar.ui.card.CardEditorActivity;
 import com.company.calendar.ui.mail.MailFragment;
 
 
@@ -25,6 +26,8 @@ public class MypagePagerAdapter extends FragmentStatePagerAdapter {
                 return new MypageFourthFragment();
             case 2:
                 return new MailFragment();
+
+
             default:
                 return null;
         }
@@ -46,6 +49,7 @@ public class MypagePagerAdapter extends FragmentStatePagerAdapter {
                 return "내 작성글 보기";
             case 2:
                 return "메일";
+
 
             default:
                 return null;

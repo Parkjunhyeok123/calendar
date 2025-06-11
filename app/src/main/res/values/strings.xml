@@ -22,6 +22,21 @@
         <item>경조사</item>
     </string-array>
 
+    <string-array name="font_list">
+        <item>sans-serif</item>
+        <item>serif</item>
+        <item>monospace</item>
+    </string-array>
+
+    <string-array name="theme_list">
+        <item>화이트</item>
+        <item>그레이</item>
+        <item>모카</item>
+    </string-array>
+
+
+
+
     <string name="menu_option">설정</string>
     <string name="menu_slideshow">옵션</string>
     <string name="menu_people">사원들</string>

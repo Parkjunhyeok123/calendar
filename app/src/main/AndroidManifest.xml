@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
 
     <application
@@ -58,6 +63,7 @@
         <activity android:name=".ui.approval.LeaveRequestListActivity" />
         <activity android:name=".ui.approval.LeaveRequestActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
+        <activity android:name=".ui.card.CardEditorActivity" />
         <activity
             android:name=".ui.login.FindPwActivity"
             android:exported="true"
