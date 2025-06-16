@@ -45,7 +45,7 @@ public class CommunityPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return "자유 게시판";
             case 2:
-                return "공지 사랑";
+                return "공지 사항";
             default:
                 return null;
         }

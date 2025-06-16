@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -40,6 +44,10 @@ public class CommunityThirdFragment extends Fragment {
     private PostListAdapter postListAdapterNotice;
     private List<Post> postListNotice;
     private ValueEventListener postsListenerNotice;
+    private LinearLayout bottomActionLayout;
+    private Spinner spinnerSearchTypeNotice;
+    private EditText editTextSearchNotice;
+    private ImageButton buttonSearchNotice;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,6 +58,17 @@ public class CommunityThirdFragment extends Fragment {
         listViewPostsNotice = root.findViewById(R.id.listViewPostsNotice);
         fragmentContainerNotice = root.findViewById(R.id.fragment_container_notice);
 
+        bottomActionLayout = root.findViewById(R.id.bottom_action_layout);
+
+        spinnerSearchTypeNotice = root.findViewById(R.id.spinnerSearchTypeNotice);
+        editTextSearchNotice = root.findViewById(R.id.editTextSearchNotice);
+        buttonSearchNotice = root.findViewById(R.id.buttonSearchNotice);
+
+        buttonSearchNotice.setOnClickListener(v -> {
+            String searchType = spinnerSearchTypeNotice.getSelectedItem().toString();
+            String keyword = editTextSearchNotice.getText().toString().trim();
+            performSearch(searchType, keyword);
+        });
 
         firebaseAuthNotice = FirebaseAuth.getInstance();
         currentUserNotice = firebaseAuthNotice.getCurrentUser();
@@ -78,9 +97,33 @@ public class CommunityThirdFragment extends Fragment {
         return root;
     }
 
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getParentFragmentManager().addOnBackStackChangedListener(() -> {
+            Fragment writePostFragment = getParentFragmentManager().findFragmentByTag("FreeWritePostFragment");
+            Fragment postDetailFragment = getParentFragmentManager().findFragmentByTag("PostDetail3Fragment");
+
+            if (writePostFragment == null && postDetailFragment == null) {
+                listViewPostsNotice.setVisibility(View.VISIBLE);
+                buttonNewPostNotice.setVisibility(View.VISIBLE);
+                fragmentContainerNotice.setVisibility(View.GONE);
+
+                bottomActionLayout.setVisibility(View.VISIBLE);
+                editTextSearchNotice.setVisibility(View.VISIBLE);
+                spinnerSearchTypeNotice.setVisibility(View.VISIBLE);
+                buttonSearchNotice.setVisibility(View.VISIBLE);
+
+                checkIfAdmin();
+            }
+        });
+    }
+
     // Firebase에서 새 게시글 실시간으로 감지
     private void listenForNewPosts() {
-        databaseReferenceNotice.addValueEventListener(new ValueEventListener() {
+        postsListenerNotice = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postListNotice.clear();
@@ -97,7 +140,9 @@ public class CommunityThirdFragment extends Fragment {
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getContext(), "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
-        });
+        };
+
+        databaseReferenceNotice.addValueEventListener(postsListenerNotice);
     }
 
     // 공지사항이 새로 올라왔을 때 알림 표시
@@ -145,6 +190,58 @@ public class CommunityThirdFragment extends Fragment {
         }
     }
 
+    private void performSearch(String searchType, String keyword) {
+        if (keyword.isEmpty()) {
+            // 검색어가 없으면 전체 게시글 불러오기
+            listenForNewPosts();
+            return;
+        }
+
+        // 전체 데이터를 한번 읽고, 클라이언트에서 필터링 (Firebase Realtime Database 특성상 복잡한 쿼리 제한)
+        databaseReferenceNotice.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postListNotice.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Post post = postSnapshot.getValue(Post.class);
+                    if (post != null) {
+                        boolean matches = false;
+                        switch (searchType) {
+                            case "제목":
+                                matches = post.getTitle() != null && post.getTitle().toLowerCase().contains(keyword.toLowerCase());
+                                break;
+                            case "내용":
+                                matches = post.getContent() != null && post.getContent().toLowerCase().contains(keyword.toLowerCase());
+                                break;
+                            case "작성자":
+                                matches = post.getAuthor() != null && post.getAuthor().toLowerCase().contains(keyword.toLowerCase());
+                                break;
+                            default:
+                                // 기본은 제목 검색
+                                matches = post.getTitle() != null && post.getTitle().toLowerCase().contains(keyword.toLowerCase());
+                        }
+
+                        if (matches) {
+                            postListNotice.add(post);
+                        }
+                    }
+                }
+
+                postListAdapterNotice.notifyDataSetChanged();
+
+                if (postListNotice.isEmpty()) {
+                    Toast.makeText(getContext(), "검색 결과가 없습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getContext(), "검색 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     // 게시글 작성 화면 열기 메서드
     private void openNoticeWritePostFragment() {
         NoticeWritePostFragment noticeWritePostFragment = new NoticeWritePostFragment();
@@ -158,6 +255,10 @@ public class CommunityThirdFragment extends Fragment {
         listViewPostsNotice.setVisibility(View.GONE);
         buttonNewPostNotice.setVisibility(View.GONE);
         fragmentContainerNotice.setVisibility(View.VISIBLE);
+        bottomActionLayout.setVisibility(View.GONE);
+        editTextSearchNotice.setVisibility(View.GONE);
+        spinnerSearchTypeNotice.setVisibility(View.GONE);
+        buttonSearchNotice.setVisibility(View.GONE);
     }
 
     // 게시글 조회수 증가 및 상세보기로 이동
@@ -191,6 +292,12 @@ public class CommunityThirdFragment extends Fragment {
         listViewPostsNotice.setVisibility(View.GONE);
         buttonNewPostNotice.setVisibility(View.GONE);
         fragmentContainerNotice.setVisibility(View.VISIBLE);
+
+        bottomActionLayout.setVisibility(View.GONE);
+        editTextSearchNotice.setVisibility(View.GONE);
+        spinnerSearchTypeNotice.setVisibility(View.GONE);
+        buttonSearchNotice.setVisibility(View.GONE);
+
     }
 
     @Override
@@ -207,17 +314,18 @@ public class CommunityThirdFragment extends Fragment {
 
         listViewPostsNotice.setVisibility(View.VISIBLE);
         fragmentContainerNotice.setVisibility(View.GONE);
+        bottomActionLayout.setVisibility(View.VISIBLE);
+        editTextSearchNotice.setVisibility(View.VISIBLE);
+        spinnerSearchTypeNotice.setVisibility(View.VISIBLE);
+        buttonSearchNotice.setVisibility(View.VISIBLE);
     }
-
-
-
 
     @Override
     public void onPause() {
         super.onPause();
         if (postsListenerNotice != null) {
             databaseReferenceNotice.removeEventListener(postsListenerNotice);
+            postsListenerNotice = null;
         }
-
     }
 }

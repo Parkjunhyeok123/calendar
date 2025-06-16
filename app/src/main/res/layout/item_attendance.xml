@@ -15,14 +15,20 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="근무중" />
+
+    <TextView
         android:id="@+id/tvCheckIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="상태 09:00" />
+        android:text="출근 09:00" />
 
     <TextView
         android:id="@+id/tvCheckOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="출/퇴 18:00" />
+        android:text="퇴근 18:00" />
 </LinearLayout>

@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,34 +35,51 @@ import java.util.List;
 
 public class CommunitySecondFragment extends Fragment {
 
-    private Button buttonNewPost;
-    private ListView listViewPosts;
-    private FrameLayout fragmentContainer;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser currentUser;
-    private DatabaseReference databaseReference;
-    private PostListAdapter postListAdapter;
-    private List<Post> postList;
-    private ValueEventListener postsListener;
+    private Button buttonNewPostFree;
+    private ListView listViewPostsFree;
+    private FrameLayout fragmentContainerFree;
+
+    private FirebaseAuth firebaseAuthFree;
+    private FirebaseUser currentUserFree;
+    private DatabaseReference databaseReferenceFree;
+
+    private PostListAdapter postListAdapterFree;
+    private List<Post> postListFree;
+    private ValueEventListener postsListenerFree;
+
+    private LinearLayout bottomActionLayout;
+
+    private Spinner spinnerSearchType;
+    private EditText editTextSearch;
+    private ImageButton buttonSearch;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_community_second, container, false);
 
-        buttonNewPost = root.findViewById(R.id.buttonNewPost);
-        listViewPosts = root.findViewById(R.id.listViewPosts);
-        fragmentContainer = root.findViewById(R.id.fragment_container);
+        buttonNewPostFree = root.findViewById(R.id.buttonNewPost);
+        listViewPostsFree = root.findViewById(R.id.listViewPosts);
+        fragmentContainerFree = root.findViewById(R.id.fragment_container);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        currentUser = firebaseAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference()
+        bottomActionLayout = root.findViewById(R.id.bottom_action_layout);
+
+        spinnerSearchType = root.findViewById(R.id.spinnerSearchType);
+        editTextSearch = root.findViewById(R.id.editTextSearch);
+        buttonSearch = root.findViewById(R.id.buttonSearch);
+
+
+
+        firebaseAuthFree = FirebaseAuth.getInstance();
+        currentUserFree = firebaseAuthFree.getCurrentUser();
+        databaseReferenceFree = FirebaseDatabase.getInstance().getReference()
                 .child("board")
                 .child("general_boards")
-                .child("board_id_2")  // 자유게시판 경로
+                .child("board_id_2") // 자유게시판
                 .child("posts");
 
-        buttonNewPost.setOnClickListener(v -> {
-            if (currentUser != null) {
+        buttonNewPostFree.setOnClickListener(v -> {
+            if (currentUserFree != null) {
                 openFreeWritePostFragment();
             } else {
                 Toast.makeText(getContext(), "로그인 후 이용해주세요.", Toast.LENGTH_SHORT).show();
@@ -66,104 +87,183 @@ public class CommunitySecondFragment extends Fragment {
             }
         });
 
-        listViewPosts.setOnItemClickListener((parent, view, position, id) -> {
-            Post selectedPost = postList.get(position);
+        listViewPostsFree.setOnItemClickListener((parent, view, position, id) -> {
+            Post selectedPost = postListFree.get(position);
             incrementViewCountAndOpenDetail(selectedPost);
         });
-
+        buttonSearch.setOnClickListener(v -> performSearch());
         return root;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getParentFragmentManager().addOnBackStackChangedListener(() -> {
+            Fragment writePostFragment = getParentFragmentManager().findFragmentByTag("FreeWritePostFragment");
+            Fragment postDetailFragment = getParentFragmentManager().findFragmentByTag("PostDetail2Fragment");
+
+            if (writePostFragment == null && postDetailFragment == null) {
+                listViewPostsFree.setVisibility(View.VISIBLE);
+                buttonNewPostFree.setVisibility(View.VISIBLE);
+                fragmentContainerFree.setVisibility(View.GONE);
+
+                bottomActionLayout.setVisibility(View.VISIBLE);
+                editTextSearch.setVisibility(View.VISIBLE);
+                spinnerSearchType.setVisibility(View.VISIBLE);
+                buttonSearch.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void performSearch() {
+        String searchType = spinnerSearchType.getSelectedItem().toString();
+        String keyword = editTextSearch.getText().toString().trim();
+
+        if (keyword.isEmpty()) {
+            Toast.makeText(getContext(), "검색어를 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        List<Post> filteredList = new ArrayList<>();
+        for (Post post : postListFree) {
+            if (post == null) continue;
+            switch (searchType) {
+                case "제목":
+                    if (post.getTitle() != null && post.getTitle().contains(keyword)) {
+                        filteredList.add(post);
+                    }
+                    break;
+                case "내용":
+                    if (post.getContent() != null && post.getContent().contains(keyword)) {
+                        filteredList.add(post);
+                    }
+                    break;
+                case "작성자":
+                    if (post.getAuthor() != null && post.getAuthor().contains(keyword)) {
+                        filteredList.add(post);
+                    }
+                    break;
+            }
+        }
+
+        postListAdapterFree = new PostListAdapter(getActivity(), R.layout.post_list_item, filteredList);
+        listViewPostsFree.setAdapter(postListAdapterFree);
+    }
+
+
+
     private void openFreeWritePostFragment() {
-        FreeWritePostFragment freeWritePostFragment = new FreeWritePostFragment();
+        FreeWritePostFragment fragment = new FreeWritePostFragment();
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, freeWritePostFragment, "FreeWritePostFragment");
+        transaction.replace(R.id.fragment_container, fragment, "FreeWritePostFragment");
         transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
 
-        listViewPosts.setVisibility(View.GONE);
-        buttonNewPost.setVisibility(View.GONE);
-        fragmentContainer.setVisibility(View.VISIBLE);
+        listViewPostsFree.setVisibility(View.GONE);
+        buttonNewPostFree.setVisibility(View.GONE);
+        fragmentContainerFree.setVisibility(View.VISIBLE);
+        bottomActionLayout.setVisibility(View.GONE);
+        editTextSearch.setVisibility(View.GONE);
+        spinnerSearchType.setVisibility(View.GONE);
+        buttonSearch.setVisibility(View.GONE);
     }
 
     private void incrementViewCountAndOpenDetail(Post post) {
-        DatabaseReference postRef = databaseReference.child(post.getPostId());
+        DatabaseReference postRef = databaseReferenceFree.child(post.getPostId());
         postRef.child("viewCount").setValue(post.getViewCount() + 1)
                 .addOnSuccessListener(aVoid -> openPostDetail2Fragment(post))
                 .addOnFailureListener(e -> Toast.makeText(getContext(), "조회수 증가 실패", Toast.LENGTH_SHORT).show());
     }
 
-    private void openPostDetail2Fragment(Post selectedPost) {
-        PostDetail2Fragment postDetail2Fragment = new PostDetail2Fragment();
+    private void openPostDetail2Fragment(Post post) {
+        PostDetail2Fragment fragment = new PostDetail2Fragment();
         Bundle bundle = new Bundle();
-        bundle.putString("postId", selectedPost.getPostId());
-        postDetail2Fragment.setArguments(bundle);
+        bundle.putString("postId", post.getPostId());
+        fragment.setArguments(bundle);
 
         FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_container, postDetail2Fragment, "PostDetail2Fragment");
+        transaction.replace(R.id.fragment_container, fragment, "PostDetail2Fragment");
         transaction.addToBackStack(null);
         transaction.commitAllowingStateLoss();
 
-        listViewPosts.setVisibility(View.GONE);
-        buttonNewPost.setVisibility(View.GONE);
-        fragmentContainer.setVisibility(View.VISIBLE);
+        listViewPostsFree.setVisibility(View.GONE);
+        buttonNewPostFree.setVisibility(View.GONE);
+        fragmentContainerFree.setVisibility(View.VISIBLE);
+
+        bottomActionLayout.setVisibility(View.GONE);
+        editTextSearch.setVisibility(View.GONE);
+        spinnerSearchType.setVisibility(View.GONE);
+        buttonSearch.setVisibility(View.GONE);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initializeUI();
+        listViewPostsFree.setVisibility(View.VISIBLE);
+        buttonNewPostFree.setVisibility(View.VISIBLE);
+        fragmentContainerFree.setVisibility(View.GONE);
+
+        bottomActionLayout.setVisibility(View.VISIBLE);
+        editTextSearch.setVisibility(View.VISIBLE);
+        spinnerSearchType.setVisibility(View.VISIBLE);
+        buttonSearch.setVisibility(View.VISIBLE);
         retrievePosts();
     }
 
     private void initializeUI() {
-        postList = new ArrayList<>();
-        postListAdapter = new PostListAdapter(getActivity(), R.layout.post_list_item, postList);
-        listViewPosts.setAdapter(postListAdapter);
+        postListFree = new ArrayList<>();
+        postListAdapterFree = new PostListAdapter(getActivity(), R.layout.post_list_item, postListFree);
+        listViewPostsFree.setAdapter(postListAdapterFree);
 
-        listViewPosts.setVisibility(View.VISIBLE);
-        buttonNewPost.setVisibility(View.VISIBLE);
-        fragmentContainer.setVisibility(View.GONE);
+        listViewPostsFree.setVisibility(View.VISIBLE);
+        buttonNewPostFree.setVisibility(View.VISIBLE);
+        fragmentContainerFree.setVisibility(View.GONE);
+        bottomActionLayout.setVisibility(View.VISIBLE);
+        editTextSearch.setVisibility(View.VISIBLE);
+        spinnerSearchType.setVisibility(View.VISIBLE);
+        buttonSearch.setVisibility(View.VISIBLE);
     }
 
     private void retrievePosts() {
-        postList.clear();
-        postListAdapter.notifyDataSetChanged();
+        if (postListFree == null) {
+            postListFree = new ArrayList<>();
+        }
+        if (postListAdapterFree == null) {
+            postListAdapterFree = new PostListAdapter(getActivity(), R.layout.post_list_item, postListFree);
+            listViewPostsFree.setAdapter(postListAdapterFree);
+        }
 
-        postsListener = new ValueEventListener() {
+        postListFree.clear();
+        postListAdapterFree.notifyDataSetChanged();
+
+        postsListenerFree = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postList.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postListFree.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Post post = postSnapshot.getValue(Post.class);
                     if (post != null) {
-                        postList.add(post);
+                        postListFree.add(post);
                     }
                 }
-                postListAdapter.notifyDataSetChanged();
+                postListAdapterFree.notifyDataSetChanged();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getContext(), "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show();
             }
         };
 
-        databaseReference.addValueEventListener(postsListener);
+        databaseReferenceFree.addValueEventListener(postsListenerFree);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (postsListener != null) {
-            databaseReference.removeEventListener(postsListener);
+        if (postsListenerFree != null) {
+            databaseReferenceFree.removeEventListener(postsListenerFree);
         }
-        // UI 초기화
-        postList.clear(); // 게시글 목록을 초기화
-        postListAdapter.notifyDataSetChanged(); // 목록 갱신
-        listViewPosts.setVisibility(View.VISIBLE); // 목록 보이기
-        buttonNewPost.setVisibility(View.VISIBLE); // 새 게시글 버튼 보이기
-        fragmentContainer.setVisibility(View.GONE); // 프래그먼트 컨테이너 숨기기
     }
-
 }

@@ -2,7 +2,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 제목과 작성 시간을 한 줄에 배치 -->
+    <!-- 제목과 작성 시간 -->
     <LinearLayout
         android:id="@+id/title_layout_question"
         android:layout_width="match_parent"
@@ -10,7 +10,6 @@
         android:orientation="horizontal"
         android:padding="16dp">
 
-        <!-- 게시글 제목 -->
         <TextView
             android:id="@+id/textViewTitleQuestion"
             android:layout_width="0dp"
@@ -19,7 +18,6 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- 작성 시간 -->
         <TextView
             android:id="@+id/textViewTimeQuestion"
             android:layout_width="wrap_content"
@@ -39,7 +37,7 @@
         android:textSize="16sp"
         android:padding="16dp" />
 
-    <!-- 조회수 표시 -->
+    <!-- 조회수 -->
     <TextView
         android:id="@+id/textViewViewCountQuestion"
         android:layout_width="wrap_content"
@@ -62,66 +60,75 @@
         android:textStyle="italic"
         android:padding="16dp" />
 
-    <!-- 수정하기 버튼 -->
-    <Button
-        android:id="@+id/buttonEditPostQuestion"
+    <!-- 수정/삭제 이미지 버튼 수평 배치 -->
+    <LinearLayout
+        android:id="@+id/edit_delete_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="수정하기"
         android:layout_below="@id/textViewAuthorQuestion"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_button"
-        android:textColor="#FFFFFF"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp" />
+        android:orientation="horizontal">
 
-    <!-- 삭제하기 버튼 -->
-    <Button
-        android:id="@+id/buttonDeletePostQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="삭제하기"
-        android:layout_below="@id/textViewAuthorQuestion"
-        android:layout_marginTop="16dp"
-        android:layout_toEndOf="@id/buttonEditPostQuestion"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_button"
-        android:textColor="#FFFFFF"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp" />
+        <ImageButton
+            android:id="@+id/buttonEditPostQuestion"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/fix"
+            android:background="@android:color/transparent"
+            android:contentDescription="수정하기"
+            android:scaleType="fitCenter" />
 
-    <!-- 댓글 입력 창 -->
-    <EditText
-        android:id="@+id/editTextCommentQuestion"
+        <ImageButton
+            android:id="@+id/buttonDeletePostQuestion"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/delete"
+            android:background="@android:color/transparent"
+            android:layout_marginStart="16dp"
+            android:contentDescription="삭제하기"
+            android:scaleType="fitCenter" />
+    </LinearLayout>
+
+    <!-- 댓글 입력창과 전송버튼 -->
+    <LinearLayout
+        android:id="@+id/comment_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonEditPostQuestion"
+        android:layout_below="@id/edit_delete_layout"
         android:layout_marginTop="16dp"
-        android:hint="댓글을 입력하세요..."
-        android:padding="16dp" />
-
-    <!-- 댓글 작성 버튼 -->
-    <Button
-        android:id="@+id/buttonSubmitCommentQuestion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="댓글 작성"
-        android:layout_below="@id/editTextCommentQuestion"
-        android:layout_marginTop="16dp"
-        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/rounded_button"
-        android:textColor="#FFFFFF"
-        android:paddingHorizontal="20dp"
-        android:paddingVertical="10dp" />
+        android:orientation="horizontal">
 
-    <!-- 댓글 리스트를 표시할 RecyclerView -->
+        <EditText
+            android:id="@+id/editTextCommentQuestion"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="댓글을 입력하세요..."
+            android:padding="12dp"
+            android:background="@android:drawable/edit_text"
+            android:textSize="14sp" />
+
+        <ImageButton
+            android:id="@+id/buttonSubmitCommentQuestion"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/send_button"
+            android:background="@android:color/transparent"
+            android:contentDescription="댓글 작성"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true" />
+    </LinearLayout>
+
+    <!-- 댓글 리스트 -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCommentsQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonSubmitCommentQuestion"
+        android:layout_below="@id/comment_input_layout"
         android:layout_marginTop="16dp"
         android:padding="16dp" />
 

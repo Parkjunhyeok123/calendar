@@ -195,9 +195,9 @@ public class MainFragment extends Fragment {
                 for (int i = 0; i < 7; i++) {
                     String dateKey = sdf.format(cal.getTime());
 
-                    String status = "";
-                    String checkIn = "-";
-                    String checkOut = "-";
+                    String status = "  ";
+                    String checkIn = "출근 -";
+                    String checkOut = "퇴근 -";
 
                     if (snapshot.hasChild(dateKey)) {
                         DataSnapshot daySnapshot = snapshot.child(dateKey);
@@ -206,23 +206,26 @@ public class MainFragment extends Fragment {
                             status = daySnapshot.child("status").getValue(String.class);
                         }
                         if (daySnapshot.hasChild("checkIn")) {
-                            checkIn = daySnapshot.child("checkIn").getValue(String.class);
+                            String rawCheckIn = daySnapshot.child("checkIn").getValue(String.class);
+                            if (rawCheckIn != null && !rawCheckIn.isEmpty()) {
+                                checkIn = "출근 " + rawCheckIn;
+                            }
                         }
                         if (daySnapshot.hasChild("checkOut")) {
-                            checkOut = daySnapshot.child("checkOut").getValue(String.class);
+                            String rawCheckOut = daySnapshot.child("checkOut").getValue(String.class);
+                            if (rawCheckOut != null && !rawCheckOut.isEmpty()) {
+                                checkOut = "퇴근 " + rawCheckOut;
+                            }
                         }
                     }
 
-                    if (status.isEmpty()) {
-                        status = "휴무중"; // 데이터 없으면 휴무중 표시
-                    }
+                    Log.d("Attendance", "Date: " + dateKey + ", status: " + status + ", in: " + checkIn + ", out: " + checkOut);
 
-                    String timeDisplay = (checkIn.equals("-") && checkOut.equals("-")) ? "-" : (checkIn + " - " + checkOut);
+                    attendanceList.add(new AttendanceAdapter.Attendance(
+                            dayNames[i], status, checkIn, checkOut
+                    ));
 
-                    Log.d("Attendance", "Date: " + dateKey + ", status: " + status + ", timeDisplay: " + timeDisplay);
-
-                    attendanceList.add(new AttendanceAdapter.Attendance(dayNames[i], status, timeDisplay));
-                    cal.add(Calendar.DAY_OF_MONTH, 1);  // 날짜를 한 칸씩 이동
+                    cal.add(Calendar.DAY_OF_MONTH, 1);
                 }
 
                 attendanceAdapter.notifyDataSetChanged();
@@ -234,6 +237,7 @@ public class MainFragment extends Fragment {
             }
         });
     }
+
 
 
 

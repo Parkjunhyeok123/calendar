@@ -27,10 +27,16 @@
             android:hint="메시지를 입력하세요"
             android:inputType="text"/>
 
-        <Button
+        <ImageButton
             android:id="@+id/btnSend"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="전송"/>
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/send_button"
+            android:background="@android:color/transparent"
+            android:contentDescription="메시지 전송"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"/>
+
+
     </LinearLayout>
 </LinearLayout>

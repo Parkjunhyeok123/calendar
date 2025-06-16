@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
 
         rvMessages = findViewById(R.id.rvMessages);
         etMessage = findViewById(R.id.etMessage);
-        btnSend = findViewById(R.id.btnSend);
+        ImageButton btnSend = findViewById(R.id.btnSend);
 
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

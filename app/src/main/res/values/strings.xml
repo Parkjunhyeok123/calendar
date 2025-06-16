@@ -15,6 +15,13 @@
     <string name="menu_home">홈</string>
     <string name="menu_community">커뮤니티</string>
 
+
+    <string-array name="search_options">
+        <item>제목</item>
+        <item>글쓴이</item>
+        <item>내용</item>
+    </string-array>
+
     <string-array name="leave_types">
         <item>연차</item>
         <item>반차</item>

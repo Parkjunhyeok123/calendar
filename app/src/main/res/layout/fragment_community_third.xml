@@ -1,29 +1,87 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- 게시글 목록을 표시하는 ListView -->
+    <!-- 게시글 목록 -->
     <ListView
         android:id="@+id/listViewPostsNotice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/buttonNewPostNotice" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 
-    <!-- 새로운 게시글 작성 버튼 -->
-    <Button
-        android:id="@+id/buttonNewPostNotice"
-        android:layout_width="wrap_content"
+    <!-- 검색 및 글쓰기 하단 컨트롤 영역 -->
+    <LinearLayout
+        android:id="@+id/bottom_action_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="#F9F9F9">
 
+        <!-- 검색 필터 + 입력 + 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-        android:text="게시글 작성" />
+            <Spinner
+                android:id="@+id/spinnerSearchTypeNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:entries="@array/search_options"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_marginEnd="6dp" />
 
+            <EditText
+                android:id="@+id/editTextSearchNotice"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:hint="검색어 입력"
+                android:background="@android:drawable/edit_text"
+                android:textSize="14sp"
+                android:paddingHorizontal="10dp" />
+
+            <ImageButton
+                android:id="@+id/buttonSearchNotice"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="6dp"
+                android:src="@android:drawable/ic_menu_search"
+                android:background="@android:color/transparent"
+                android:contentDescription="검색"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+
+        <!-- 글쓰기 버튼 (오른쪽 정렬) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/buttonNewPostNotice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="게시글 작성"
+                android:backgroundTint="#6200EE"
+                android:textColor="#FFFFFF"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 필요 시 프래그먼트 표시용 -->
     <FrameLayout
         android:id="@+id/fragment_container_notice"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:visibility="gone" />
+</LinearLayout>

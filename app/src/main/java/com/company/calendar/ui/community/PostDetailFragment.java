@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +36,8 @@ public class    PostDetailFragment extends Fragment {
 
     private TextView textViewTitleQuestion, textViewContentQuestion, textViewAuthorQuestion, textViewTimeQuestion, textViewViewCountQuestion;
     private EditText editTextCommentQuestion;
-    private Button buttonSubmitCommentQuestion, buttonEditPostQuestion, buttonDeletePostQuestion;
+    private ImageButton buttonSubmitCommentQuestion, buttonEditPostQuestion, buttonDeletePostQuestion;
+
     private RecyclerView recyclerViewCommentsQuestion;
     private CommentAdapter commentAdapterQuestion;
     private List<Comment> commentListQuestion = new ArrayList<>();

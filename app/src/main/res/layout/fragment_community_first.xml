@@ -1,27 +1,87 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- 게시글 목록을 표시하는 ListView -->
+    <!-- 게시글 목록 (위쪽) -->
     <ListView
         android:id="@+id/listViewPostsQuestion"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/buttonNewPostQuestion" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="0.5dp" />
 
-    <!-- 게시글 작성 버튼을 화면 하단 중앙에 배치 -->
-    <Button
-        android:id="@+id/buttonNewPostQuestion"
-        android:layout_width="wrap_content"
+    <!-- 아래쪽 입력/검색/작성 버튼 묶음 -->
+    <LinearLayout
+        android:id="@+id/bottom_action_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="게시글 작성"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp" />
+        android:orientation="vertical"
+        android:padding="8dp"
+        android:background="#F4F4F4">
 
+        <!-- 검색 조건 + 검색어 + 버튼 -->
+        <LinearLayout
+            android:id="@+id/search_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <Spinner
+                android:id="@+id/spinnerSearchType"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:entries="@array/search_options"
+                android:background="@android:drawable/btn_dropdown"
+                android:layout_marginEnd="6dp" />
+
+            <EditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="0dp"
+                android:layout_height="36dp"
+                android:layout_weight="1"
+                android:hint="검색어 입력"
+                android:background="@android:drawable/edit_text"
+                android:textSize="14sp"
+                android:paddingHorizontal="10dp" />
+
+            <ImageButton
+                android:id="@+id/buttonSearch"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="6dp"
+                android:src="@android:drawable/ic_menu_search"
+                android:background="@android:color/transparent"
+                android:contentDescription="검색"
+                android:scaleType="centerInside" />
+        </LinearLayout>
+
+        <!-- 게시글 작성 버튼 (아래 오른쪽에 작게 배치) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/buttonNewPostQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="글쓰기"
+                android:backgroundTint="#6200EE"
+                android:textColor="#FFFFFF"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 프래그먼트 표시 영역 (필요 시 사용) -->
     <FrameLayout
         android:id="@+id/fragmentContainerQuestion"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="0"
+        android:visibility="gone" />
+</LinearLayout>

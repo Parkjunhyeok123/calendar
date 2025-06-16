@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class PostDetail3Fragment extends Fragment {
 
     private TextView textViewTitleNotice, textViewContentNotice, textViewAuthor, textViewTime, textViewViewCount;
     private EditText editTextCommentNotice;
-    private Button buttonSubmitCommentNotice, buttonEditNotice, buttonDeleteNotice;
+    private ImageButton buttonSubmitCommentNotice, buttonEditNotice, buttonDeleteNotice;
     private RecyclerView recyclerViewCommentsNotice;
     private CommentAdapter commentAdapter;
     private List<Comment> commentList = new ArrayList<>();
